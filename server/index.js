@@ -4,10 +4,10 @@ const scrapers = require('./scrapers')
 const app = express()
 
 app.get('/', async (req, res) => {
-    let search = req.query.search.replace(" ", "-")
-    console.log(search)
+    let search = req.query.search.replace(/ /g, "-")
+    const page = req.query.page
     try {
-        const channelData = await scrapers.scrapeCT(search, 3)
+        const channelData = await scrapers.scrapeZJ(search, page)
         res.json(channelData)
     }
     catch (err) {
